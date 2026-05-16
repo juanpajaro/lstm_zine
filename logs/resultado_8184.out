@@ -1,0 +1,14 @@
+creamos variable entorno para CONDS
+ 
+Iniciamos CONDA
+Reiniciamos sistema equivalente al /.bashrc
+ 
+**********************************************
+Activamos el ambiente:
+El ambiente activado es: pajaroenv
+**********************************************
+ 
+**********************************************
+corriendo programa en python...
+**********************************************
+hola pajaro y juan guillermo

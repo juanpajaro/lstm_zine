@@ -1,0 +1,17 @@
+creamos variable entorno para CONDS
+ 
+Iniciamos CONDA
+Reiniciamos sistema equivalente al /.bashrc
+ 
+**********************************************
+Activamos el ambiente:
+El ambiente activado es: pajaroenv
+**********************************************
+ 
+**********************************************
+corriendo programa en python...
+**********************************************
+Iniciando descarga del dataset IMDB...
+Downloading data from https://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz
+
+✗ Error: URL fetch failure on https://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz: None -- [Errno -3] Temporary failure in name resolution
