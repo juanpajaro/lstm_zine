@@ -1,3 +1,6 @@
+import keras
+from keras import layers
+
 max_length = 600
 max_tokens = 30000
 text_vectorization = layers.TextVectorization(
@@ -18,7 +21,6 @@ sequence_val_ds = val_ds.map(
 sequence_test_ds = test_ds.map(
     lambda x, y: (text_vectorization(x), y), num_parallel_calls=8
 )
-
 
 hidden_dim = 64
 model = keras.Sequential(
