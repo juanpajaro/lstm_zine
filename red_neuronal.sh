@@ -5,7 +5,7 @@
 #SBATCH -e logs/error_%j.err
 #SBATCH --ntasks=4             ## Number of tasks (analyses) to run
 #SBATCH --cpus-per-task=16      ## The number of threads the code will use
-#SBATCH --mem-per-cpu=100M     ## Real memory(MB) per CPU required by the job.
+#SBATCH --mem-per-cpu=16G     ## Real memory(MB) per CPU required by the job.
 
 ## Load the python interpreter
 ## module load python

@@ -1,0 +1,38 @@
+#!/bin/bash
+#SBATCH --job-name=red_lstm_dist
+#SBATCH -p debug
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=2
+#SBATCH --cpus-per-task=16
+#SBATCH --mem-per-cpu=16G
+#SBATCH -o logs/resultado_%j.out
+#SBATCH -e logs/error_%j.err
+
+set -euo pipefail
+
+source /zine/HPC0251/miniconda3/etc/profile.d/conda.sh
+conda activate pajaroenv
+
+mkdir -p logs
+
+# Construye la lista host:port para todos los workers de SLURM.
+PORT=12345
+HOSTS=$(scontrol show hostnames "$SLURM_NODELIST")
+WORKER_HOSTS=""
+for h in $HOSTS; do
+  for i in $(seq 1 "$SLURM_NTASKS_PER_NODE"); do
+    if [ -z "$WORKER_HOSTS" ]; then
+      WORKER_HOSTS="${h}:${PORT}"
+    else
+      WORKER_HOSTS="${WORKER_HOSTS},${h}:${PORT}"
+    fi
+    PORT=$((PORT+1))
+  done
+done
+export WORKER_HOSTS
+
+echo "WORKER_HOSTS=${WORKER_HOSTS}"
+echo "SLURM_NTASKS=${SLURM_NTASKS}"
+
+echo "Iniciando entrenamiento distribuido..."
+srun python3 run_lstm_par.py --per-worker-batch-size 32 --epochs 10
