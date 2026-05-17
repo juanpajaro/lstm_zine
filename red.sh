@@ -6,12 +6,28 @@
 #SBATCH -o logs/resultado_%j.out
 #SBATCH -e logs/error_%j.err
 
-set -euo pipefail
+# Creamos variables de entorno
+export PATH="/apps/bpike/miniforge3/bin:$PATH"
+echo "creamos variable entorno para CONDS"
 
+# Inciamos CONDA
+conda init
+echo " "
+echo "Iniciamos CONDA"
+# Cargamos el nuevo archivo bashrc
 source /zine/HPC0251/miniconda3/etc/profile.d/conda.sh
-conda activate pajaroenv
+echo "Reiniciamos sistema equivalente al /.bashrc"
+echo " "
+# Configuramos Conda para no iniciar con env=base
+#conda config --set auto_activate_base
 
-mkdir -p logs
+# Activamos el entorno con CONDA
+conda activate pajaroenv
+echo "**********************************************"
+echo "Activamos el ambiente:"
+echo "El ambiente activado es: "$CONDA_DEFAULT_ENV
+echo "**********************************************"
+echo " "
 
 # Construye la lista host:port para todos los workers de SLURM.
 PORT=12345
