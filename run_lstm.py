@@ -1,5 +1,6 @@
 import keras
 import pathlib
+from datetime import datetime
 from keras import layers
 from keras.utils import text_dataset_from_directory
 
@@ -38,6 +39,18 @@ def load_datasets_from_directories(batch_size=32):
     test_ds = text_dataset_from_directory(test_dir, batch_size=batch_size)
 
     return train_ds, val_ds, test_ds
+
+
+def save_versioned_model(model, output_dir="models"):
+    """Guarda el modelo con un nombre versionado dentro de models/."""
+    output_path = pathlib.Path(output_dir)
+    output_path.mkdir(parents=True, exist_ok=True)
+
+    version = datetime.now().strftime("%Y%m%d_%H%M%S")
+    model_path = output_path / f"lstm_model_v{version}.keras"
+    model.save(model_path)
+
+    return model_path
 
 
 def main(batch_size=32):
@@ -94,12 +107,15 @@ def main(batch_size=32):
     )
     test_loss, test_acc = model.evaluate(sequence_test_ds)
 
+    model_path = save_versioned_model(model)
+
     # Guardar las métricas de rendimiento en un archivo de texto
     with open("performance_report.txt", "w") as report_file:
         report_file.write(f"Test Loss: {test_loss}\n")
         report_file.write(f"Test Accuracy: {test_acc}\n")
 
-    print("\n✓ Reporte de rendimiento guardado en 'performance_report.txt'")
+    print("\n Reporte de rendimiento guardado en 'performance_report.txt'")
+    print(f"Modelo guardado en '{model_path}'")
 
 if __name__ == "__main__":
     main()
