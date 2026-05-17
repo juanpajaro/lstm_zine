@@ -3,7 +3,7 @@
 #SBATCH -p debug
 #SBATCH --nodes=2
 #SBATCH --ntasks-per-node=2
-#SBATCH --cpus-per-task=16
+#SBATCH --cpus-per-task=8
 #SBATCH --mem-per-cpu=16G
 #SBATCH -o logs/resultado_%j.out
 #SBATCH -e logs/error_%j.err
