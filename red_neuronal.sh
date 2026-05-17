@@ -35,7 +35,13 @@ echo "**********************************************"
 echo " "
 #ejecutar
 echo "**********************************************"
-echo "corriendo programa en python..."
+echo "corriendo cargue de datos en python..."
 echo "**********************************************"
 #*********
-python3 entrenamiento.py
+#python3 entrenamiento.py
+#ejecutar
+echo "**********************************************"
+echo "corriendo entrenamiento de red neuronal en python..."
+echo "**********************************************"
+#*********
+python3 run_lstm.py
