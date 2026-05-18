@@ -32,6 +32,7 @@ echo " "
 # Construye la lista host:port para todos los workers de SLURM.
 PORT=12345
 HOSTS=$(scontrol show hostnames "$SLURM_NODELIST")
+echo "HOSTS: ${HOSTS}"
 WORKER_HOSTS=""
 for h in $HOSTS; do
   for i in $(seq 1 "$SLURM_NTASKS_PER_NODE"); do
