@@ -2,6 +2,7 @@
 #SBATCH --job-name=red_lstm_dist
 #SBATCH -p debug
 #SBATCH --ntasks=4             ## Number of tasks (analyses) to run
+#SBATCH --ntasks-per-node=1  ## Number of tasks to run on each node
 #SBATCH --cpus-per-task=16      ## The number of threads the code will use
 #SBATCH -o logs/resultado_%j.out
 #SBATCH -e logs/error_%j.err
